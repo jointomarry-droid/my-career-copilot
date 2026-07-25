@@ -5,7 +5,7 @@ import { parseResume, tailorForApplication, generateCoverLetter } from '../../..
 export const dynamic = 'force-dynamic';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const ALLOWED_EXTENSIONS = ['.pdf'];
+const ALLOWED_EXTENSIONS = ['.pdf', '.docx', '.doc', '.txt', '.csv'];
 
 function validateFile(file) {
   if (!file) return { valid: false, error: 'No file provided' };
@@ -14,7 +14,7 @@ function validateFile(file) {
   const ext = '.' + name.split('.').pop().toLowerCase();
 
   if (!ALLOWED_EXTENSIONS.includes(ext)) {
-    return { valid: false, error: `Invalid file type "${ext}". Only PDF files are accepted.` };
+    return { valid: false, error: `Invalid file type "${ext}". Supported: PDF, DOCX, DOC, TXT, CSV` };
   }
 
   if (file.size > MAX_FILE_SIZE) {
@@ -87,10 +87,10 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Uploaded file is empty' }, { status: 400 });
     }
 
-    const parsed = await parseResume(buffer);
+    const parsed = await parseResume(buffer, file.name);
 
     if (!parsed || !parsed.rawText) {
-      return NextResponse.json({ error: 'Could not extract text from PDF. The file may be image-based or corrupted.' }, { status: 422 });
+      return NextResponse.json({ error: 'Could not extract text from file. The file may be image-based or corrupted.' }, { status: 422 });
     }
 
     if (autoUpdate) {

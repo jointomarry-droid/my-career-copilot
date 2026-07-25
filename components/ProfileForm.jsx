@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { FileText, Upload, Sparkles, Mail, Save, X, CheckCircle, AlertCircle, Eye, EyeOff, File, RotateCcw } from 'lucide-react';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
-const ACCEPTED_TYPES = ['.pdf'];
+const ACCEPTED_TYPES = ['.pdf', '.docx', '.doc', '.txt', '.csv'];
 
 function formatFileSize(bytes) {
   if (bytes < 1024) return bytes + ' B';
@@ -68,7 +68,7 @@ export default function ProfileForm({ dark }) {
 
     const ext = '.' + file.name.split('.').pop().toLowerCase();
     if (!ACCEPTED_TYPES.includes(ext)) {
-      setUploadError(`Invalid file type "${ext}". Only PDF files are accepted.`);
+      setUploadError(`Invalid file type "${ext}". Supported: PDF, DOCX, DOC, TXT, CSV`);
       return false;
     }
     if (file.size > MAX_FILE_SIZE) {
@@ -280,7 +280,7 @@ export default function ProfileForm({ dark }) {
           </div>
           <div className={`p-4 rounded border ${dark ? 'border-neutral-900 bg-neutral-950/40' : 'border-neutral-200 bg-neutral-50'}`}>
             <h4 className="text-xs font-bold font-mono mb-2">CV Master Draft</h4>
-            <input type="file" ref={fileRef} accept=".pdf" onChange={handleFileUpload} className="hidden" />
+            <input type="file" ref={fileRef} accept=".pdf,.docx,.doc,.txt,.csv" onChange={handleFileUpload} className="hidden" />
 
             <div
               onDragEnter={handleDrag}

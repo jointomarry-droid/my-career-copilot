@@ -55,8 +55,8 @@ export default function OnboardingWizard({ dark, onComplete }) {
     setUploadError('');
     if (!file) return false;
     const ext = '.' + file.name.split('.').pop().toLowerCase();
-    if (ext !== '.pdf') {
-      setUploadError(`Invalid file type "${ext}". Only PDF files are accepted.`);
+    if (!['.pdf', '.docx', '.doc', '.txt', '.csv'].includes(ext)) {
+      setUploadError(`Invalid file type "${ext}". Supported: PDF, DOCX, DOC, TXT, CSV`);
       return false;
     }
     if (file.size > 5 * 1024 * 1024) {
@@ -198,7 +198,7 @@ export default function OnboardingWizard({ dark, onComplete }) {
                 </div>
               )}
 
-              <input type="file" ref={fileRef} accept=".pdf" onChange={handleFileSelect} className="hidden" />
+              <input type="file" ref={fileRef} accept=".pdf,.docx,.doc,.txt,.csv" onChange={handleFileSelect} className="hidden" />
 
               <div
                 onDragEnter={handleDrag}
@@ -251,7 +251,7 @@ export default function OnboardingWizard({ dark, onComplete }) {
                   <div className="space-y-2">
                     <Upload className="w-8 h-8 mx-auto text-neutral-500" />
                     <p className="text-sm font-medium">Click to upload or drag and drop</p>
-                    <p className="text-xs text-neutral-500">PDF files only, max 5MB</p>
+                    <p className="text-xs text-neutral-500">PDF, DOCX, DOC, TXT, CSV — max 5MB</p>
                   </div>
                 )}
               </div>
