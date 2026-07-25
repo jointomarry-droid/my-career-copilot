@@ -1,0 +1,51 @@
+# AI Career Copilot
+
+> Autonomous AI-powered career platform that discovers scholarships, jobs, and work permits worldwide, then applies to them automatically.
+
+## Product
+
+AI Career Copilot is a SaaS platform that uses browser automation (Playwright) and large language models (Claude/GPT) to automate the entire job/scholarship/visa application process.
+
+## Features
+
+- **Smart Discovery Engine**: Scrapes DAAD, Chevening, Fulbright, LinkedIn, Indeed, and government portals for opportunities
+- **Auto-Apply Agents**: Three specialized AI agents (Scholarship Scout, Job Hunter, Permit Pathfinder) that navigate portals, fill forms, and submit applications
+- **LLM-Powered Form Filling**: Uses Claude/GPT to generate personalized cover letters, essays, and form responses
+- **Resume Tailoring**: AI rewrites resumes to match each specific job description
+- **Visa Intelligence**: Probability scoring for work permits across 6 countries (Germany, Netherlands, UK, Switzerland, Canada, Australia)
+- **Interview Preparation**: Company research, question generation, salary intelligence, and briefing documents
+- **SEO Optimizer**: Optimizes resumes and LinkedIn profiles for ATS systems and recruiter search
+- **Real-Time Monitoring**: Live terminal logs via SSE, application status tracking, and health dashboard
+- **Multi-Channel Notifications**: Email, Slack, Telegram, Discord webhook integrations
+- **Audit Trail**: Compliance-grade logging of all agent actions
+
+## Architecture
+
+- **Frontend**: Next.js 14 (App Router), React 18, Tailwind CSS, Recharts
+- **Backend**: Next.js API Routes, MongoDB (with in-memory fallback)
+- **Automation**: Playwright with anti-detection, browser pool management
+- **AI**: Anthropic Claude API for content generation
+- **Scheduling**: node-cron for automated campaign execution
+
+## API Endpoints
+
+- `POST /api/auto-apply` — Launch auto-apply workflow
+- `GET/POST /api/applications` — Application CRUD
+- `GET /api/analytics` — Dashboard statistics
+- `GET /api/health` — System health check
+- `POST /api/interview` — Generate interview prep package
+- `POST /api/seo/optimize` — Optimize resume/LinkedIn for SEO
+- `POST /api/seo/analyze` — Analyze content SEO score
+- `GET /api/stream` — SSE real-time log streaming
+- `GET /api/discoveries` — Discovery engine results
+- `GET/POST /api/campaigns` — Campaign management
+
+## Links
+
+- Website: https://aicareercopilot.com
+- Documentation: https://aicareercopilot.com/docs
+- GitHub: https://github.com/aicareercopilot
+
+## Contact
+
+- Email: support@aicareercopilot.com
